@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+
+  <title>Covid-19</title>
+  <style type="text/css">
+  .nav-item{
+    color: black;
+  }
+  #judul{
+    font-family: Raleway, sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 56px;
+  }
+  #sub-judul{
+   font-family: Raleway, sans-serif;
+   font-weight: 500;
+   font-size: 24px;
+   line-height: 29px;
+   color: #484848;
+ }
+ .btn-lg{
+  border-radius: 1.3rem;
+}
+nav.navbar {
+ width: auto;
+ left: 38%;
+ right: -26%;
+ transform: translateX(-37%);
+}
+@media(max-width: 991px){
+  #img2{
+    display: none;
+  }
+  .pt-5, .py-5 {
+    padding-top: 0rem!important;
+  }
+  nav.navbar {
+   width: auto;
+   left: 38%;
+   right: -33%;
+   transform: translateX(-37%);
+ }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+   <!-- section 1 -->
+   <section id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+     <a class="navbar-brand" href="#">
+      <img src="img/logo.png" width="36" height="36" class="d-inline-block align-top">
+      <strong>Covid-19</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#bagian1">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#bagian2">Kasus</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#bagian3">Pencegahan</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</section>
+<!-- section 1 -->
+</div>
+<div class="container">
+  <!-- section 2 -->
+  <section id="bagian1">
+    <div class="row pt-5">
+      <div class="col-lg-5 pt-5">
+        <div class="d-flex flex-column justify-content-center pt-5">
+          <h1 id="judul"  data-aos="fade-up">Tracking Covid-19</h1>
+          <h3 id="sub-judul" data-aos="fade-up" data-aos-delay="400">Mari bersama lawan COVID-19. Jika anda pernah bepergian ke daerah terdampak Corona Harap Melapor Ke Dinas Kesehatan Setempat.</h3>
+        </div>
+        <div class="pt-3" data-aos="fade-up" data-aos-delay="800">
+          <button class="btn btn-outline-primary btn-lg">Laporkan</button>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
+        <img src="img/2.jpg" class="img-fluid" id="img2">
+      </div>
+    </div>
+  </section>
+  <!-- section 2-->
+  <!-- section 3 -->
+  <section id="bagian2">
+    <div class="pt-3 text-center" data-aos="fade-up">
+      <h1 id="judul">KASUS</h1>
+    </div>
+    <div class="form-group d-flex justify-content-between"  data-aos="fade-up" data-aos-delay="150">
+      <div>
+        <select id="prov" class="form-control">
+
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-outline-primary" id="open-modal">Data Table</button>
+      </div>
+    </div>
+    <div class="pt-3 row form-group d-flex justify-content-center text-center"  data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-4 py-3 col-md-4">
+        <div class="card shadow-lg border-danger">
+          <div class="card-body">
+            <h3 id="cov-t">0</h3>
+          </div>
+          <div class="card-footer font-weight-bold border-danger">Terkonfirmasi</div>
+        </div>
+      </div>
+      <div class="col-lg-4 py-3 col-md-4">
+        <div class="card shadow-lg border-success">
+          <div class="card-body">
+            <h3 id="cov-s">0</h3>
+          </div>
+          <div class="card-footer font-weight-bold border-success">Sembuh</div>
+        </div>
+      </div>
+      <div class="col-lg-4 py-3 col-md-4">
+        <div class="card shadow-lg border-info">
+          <div class="card-body">
+            <h3 id="cov-m">0</h3>
+          </div>
+          <div class="card-footer font-weight-bold border-info">Meninggal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- section 3 -->
+  <!-- section 4 -->
+  <section id="bagian3">
+    <div class="pt-3 text-center" data-aos="fade-up">
+      <h1 id="judul">PENCEGAHAN</h1>
+    </div>
+    <div class="row form-group" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/1.png" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/2.png" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/3.png" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/4.png" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/5.png" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-lg-4 pt-3 col-md-6 col-6">
+        <div class="card border-0">
+          <img src="img/cegah/6.png" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- section 4 -->
+  <!-- section 5 modal  table-->
+  <section id="s_table">
+    <!-- Modal -->
+    <div class="modal fade" id="modal-table" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Data Virus Corona Covid-19 Indonesia</h5>
+          </div>
+          <div class="modal-body">
+            <table id="tb_covid" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Provinsi</th>
+                  <th>Positif</th>
+                  <th>Sembuh</th>
+                  <th>Meninggal</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- section 5 modal table -->
+  <footer class="footer">
+    <div class="pt-5">
+      <span class="text-muted">Powered By Mass Haris.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://www.gamelab.id/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  AOS.init();
+    // menampilkan default data covid seluruh indonesia
+    $.get('https://covid19.mathdro.id/api/countries/indonesia', function(data) {
+      $('#cov-t').text(Number(data.confirmed.value).toLocaleString())
+      $('#cov-s').text(Number(data.recovered.value).toLocaleString())
+      $('#cov-m').text(Number(data.deaths.value).toLocaleString())
+    },'json');
+    // 
+    // menampilkan data ke dropdown
+    var html = '';
+    var url = 'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
+    var tb_data_cov = []
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'json',
+      success: function(data){
+        tb_data_cov = data.features
+        html = '<option>PILIH PROVINSI</option>'
+        $.each(data.features, function(index, val) {
+          html += '<option value="'+val.attributes.Kode_Provi+'" data-total="'+val.attributes.Kasus_Posi+'" data-sembuh="'+val.attributes.Kasus_Semb+'" data-meninggal="'+val.attributes.Kasus_Meni+'">'+val.attributes.Provinsi+'</option>';
+        });
+        $('#prov').html(html)
+      }
+    });
+    // menampilkan data berdasarkan option yang dipilih
+    $('#prov').change(function(event) {
+      var total = $(this).find(':selected').attr('data-total')
+      var sembuh = $(this).find(':selected').attr('data-sembuh')
+      var mati = $(this).find(':selected').attr('data-meninggal')
+      $('#cov-t').text(Number(total).toLocaleString())
+      $('#cov-s').text(Number(sembuh).toLocaleString())
+      $('#cov-m').text(Number(mati).toLocaleString())
+    });
+    // open modal untuk bagian data table
+    $('#open-modal').click(function(event) {
+      $('#modal-table').modal('show')
+    });
+
+// bagian untuk data table
+$.ajax({
+  url: url,
+  dataType: 'JSON',
+  success: function (res) {
+    $('#tb_covid').DataTable({
+      data: res.features,
+      "columns": [
+      { "data": "attributes.Provinsi" },
+      { "data": "attributes.Kasus_Posi" },
+      { "data": "attributes.Kasus_Semb" },
+      { "data": "attributes.Kasus_Meni" }]
+    });
+  }
+});
+
+});
+</script>
+</body>
+</html>
