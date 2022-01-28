@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Anime Mantap</title>
+    <title>Anime-X</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,8 +17,31 @@
 
         .card-img-top {
             width: 100%;
-            height: 15vw;
+            height: 30vw;
             object-fit: cover;
+        }
+
+        .top-left {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            word-wrap: break-word;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            /* For mobile phones: */
+            .card-img-top {
+                width: 100%;
+                height: 65vw;
+                object-fit: cover;
+            }
         }
 
         .card:hover {
@@ -36,6 +59,7 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 550;
             -webkit-box-orient: vertical;
+            word-wrap: break-word;
         }
 
         .badge-primary {
@@ -73,8 +97,7 @@
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #181d27;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"
-                    style="color: #DC1A28; font-weight: 700;  font-size: 22px; font-family: 'Poppins', sans-serif;">Anime
-                    Mantap</a>
+                    style="color: #DC1A28; font-weight: 700;  font-size: 22px; font-family: 'Poppins', sans-serif;">Anime-X</a>
                 <div class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search Anime."
                         style="background-color: #181d27;" @change="cari">
@@ -83,11 +106,11 @@
         </nav>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="hero-title">ANIME MANTAP</h1>
+                <h1 class="hero-title">Anime-X</h1>
                 <p style="font-size: 18px; font-family: 'Poppins', sans-serif;">Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit. Eum et molestias placeat quo numquam officia a esse natus possimus libero unde at
+                    adipisicing elit. Eum et molestias placeat quo numquam officia unde at
                     dicta vero nemo ratione explicabo omnis, quisquam quaerat!
-                    Delectus nostrum consectetur veniam voluptatem quasi, doloremque in ratione, eum rerum error.</p>
+                    Delectus nostrum consectetur, doloremque in ratione, eum rerum error.</p>
             </div>
         </div>
         <!-- </section> -->
@@ -109,11 +132,12 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results">
                     <a href="#!">
                         <div class="card border-0 h-100 rounded border-0 shadow">
-                            <div class="card-body bg-dark text-white rounded border-0 shadow">
-                                <span class="badge badge-primary">{{ result.type }} | {{ result.start_date }}</span>
-                                <img :src="result.image_url" class="card-img-top">
-                                <span class="text pt-1 text-color">{{ result.title
-                                    }}</span>
+                            <img :src="result.image_url" class="card-img-top rounded">
+                            <div class="top-left">
+                                <span class="badge badge-primary">{{ result.type }}</span>
+                            </div>
+                            <div class="bottom-left">
+                                <span class="text pt-1 text-white">{{ result.title }}</span>
                             </div>
                         </div>
                     </a>
