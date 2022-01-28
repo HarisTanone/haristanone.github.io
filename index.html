@@ -9,6 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         body,
         .bg {
@@ -17,7 +19,7 @@
 
         .card-img-top {
             width: 100%;
-            height: 30vw;
+            height: 20vw;
             object-fit: cover;
         }
 
@@ -89,6 +91,13 @@
             font-size: 48px;
             line-height: 72px;
         }
+
+        .text-white {
+            color: #FFFFFF;
+            text-shadow: 1px 3px 0 #222020, 1px 10px 5px #222020;
+            color: #FFFFFF;
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -128,13 +137,24 @@
                     </select>
                 </div>
             </div>
+            <div class="row" v-if="show">
+                <div class="col-12">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" :src="detailx.trailer_url" allowfullscreen></iframe>
+                    </div>
+                    <div class="float-right pt-2">
+                        <button class="btn btn-outline-primary" v-on:click="show = false">Hidde</button>
+                    </div>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results">
-                    <a href="#!">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results" data-aos="fade-up">
+                    <a href="#!" @click="details">
+                        <!-- v-on:click="show = !show" -->
                         <div class="card border-0 h-100 rounded border-0 shadow">
-                            <img :src="result.image_url" class="card-img-top rounded">
+                            <img :src="result.image_url" class="card-img-top rounded" :data-id="result.mal_id">
                             <div class="top-left">
-                                <span class="badge badge-primary">{{ result.type }}</span>
+                                <span class="badge badge-primary">{{ result.type }} | {{ result.score }}</span>
                             </div>
                             <div class="bottom-left">
                                 <span class="text pt-1 text-white">{{ result.title }}</span>
@@ -150,11 +170,14 @@
             /in/.test(document.readyState) ? setTimeout('ready(' + f + ')', 9) : f();
         }
         ready(function () {
+            AOS.init();
             var vm = new Vue({
                 el: '#app',
                 data: {
                     results: [],
-                    cat: 'tv'
+                    cat: 'tv',
+                    show: false,
+                    detailx: []
                 },
                 mounted() {
                     axios.get('https://api.jikan.moe/v3/top/anime/1/tv')
@@ -175,6 +198,13 @@
                             .then(res => {
                                 this.results = res.data.results
                             })
+                    },
+                    details(event) {
+                        axios.get('https://api.jikan.moe/v3/anime/' + event.target.dataset.id)
+                            .then(res => {
+                                this.detailx = res.data
+                                res.data.trailer_url != null ? this.show = true : this.show = false
+                            })
                     }
                 }
             });
@@ -182,6 +212,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </body>
 
 </html>
