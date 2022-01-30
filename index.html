@@ -9,7 +9,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         body,
@@ -64,6 +63,16 @@
             word-wrap: break-word;
         }
 
+        .sysnopsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 9;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+        }
+
+
         .badge-primary {
             background-color: darkslategrey;
         }
@@ -113,18 +122,23 @@
                 </div>
             </div>
         </nav>
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid" v-if="!show">
             <div class="container">
-                <h1 class="hero-title">Anime-X</h1>
-                <p style="font-size: 18px; font-family: 'Poppins', sans-serif;">Lorem ipsum, dolor sit amet consectetur
-                    adipisicing elit. Eum et molestias placeat quo numquam officia unde at
-                    dicta vero nemo ratione explicabo omnis, quisquam quaerat!
-                    Delectus nostrum consectetur, doloremque in ratione, eum rerum error.</p>
+                <div class="align-self-center align-middle">
+                    <h1 class="hero-title">Anime-X</h1>
+                    <p style="font-size: 18px; font-family: 'Poppins', sans-serif;">
+                        Web page ini dibuat oleh <strong>Haris Tanone</strong> dengan tujuan untuk latihan tambahan.<br>
+                        Dengan memanfaatkan data yang disediakan dari <strong>Jikan API</strong> yang diambil dengan
+                        menggunakan <strong>Vue Js</strong>.<br>
+                        Untuk tampilan dari web page ini dibagun dengan menggunakan framework <strong>CSS
+                            Bootstrap 4.*.</strong>
+                    </p>
+                </div>
             </div>
         </div>
         <!-- </section> -->
         <div class="container" id="app">
-            <div class="row pb-1">
+            <div class="row pb-1" v-if="!show">
                 <div class="col-7 col-lg-7 col-sm-7 col-md-7">
                     <h3 class="text-color">Top {{ cat }} Anime</h3>
                 </div>
@@ -142,16 +156,27 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" :src="detailx.trailer_url" allowfullscreen></iframe>
                     </div>
+                </div>
+            </div>
+            <div class="row pt-3 pb-3" v-if="show">
+                <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-center">
+                    <img :src="detailx.image_url" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12 col-12 text-white">
+                    <span><strong>Title :</strong> {{ detailx.title }}</span><br>
+                    <span><strong>Type :</strong> {{ detailx.type }}</span><br>
+                    <span><strong>Status :</strong> {{ detailx.status }}</span><br>
+                    <span class="sysnopsis"><strong>Synopsis :</strong> {{ detailx.synopsis }}</span>
                     <div class="float-right pt-2">
                         <button class="btn btn-outline-primary" v-on:click="show = false">Hidde</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results" data-aos="fade-up">
+            <div class="row" v-if="!show">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results">
                     <a href="#!" @click="details">
-                        <!-- v-on:click="show = !show" -->
                         <div class="card border-0 h-100 rounded border-0 shadow">
+                            <img v-if="loading" src="loading.gif" class="card-img-top rounded" :data-id="result.mal_id">
                             <img :src="result.image_url" class="card-img-top rounded" :data-id="result.mal_id">
                             <div class="top-left">
                                 <span class="badge badge-primary">{{ result.type }} | {{ result.score }}</span>
@@ -170,19 +195,20 @@
             /in/.test(document.readyState) ? setTimeout('ready(' + f + ')', 9) : f();
         }
         ready(function () {
-            AOS.init();
             var vm = new Vue({
                 el: '#app',
                 data: {
                     results: [],
                     cat: 'tv',
                     show: false,
-                    detailx: []
+                    detailx: [],
+                    loading: true
                 },
                 mounted() {
                     axios.get('https://api.jikan.moe/v3/top/anime/1/tv')
                         .then(res => {
                             this.results = res.data.top
+                            this.loading = false
                         })
                 },
                 methods: {
@@ -191,12 +217,14 @@
                             .then(res => {
                                 this.results = res.data.top
                                 this.cat = event.target.value
+                                this.loading = false
                             })
                     },
                     cari(event) {
                         axios.get('https://api.jikan.moe/v3/search/anime?q=' + event.target.value + '&page=1')
                             .then(res => {
                                 this.results = res.data.results
+                                this.show = false
                             })
                     },
                     details(event) {
@@ -204,6 +232,7 @@
                             .then(res => {
                                 this.detailx = res.data
                                 res.data.trailer_url != null ? this.show = true : this.show = false
+                                this.loading = false
                             })
                     }
                 }
@@ -212,7 +241,6 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </body>
 
 </html>
