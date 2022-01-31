@@ -1,0 +1,153 @@
+body,
+.bg {
+    background-color: #1A202C;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    word-wrap: break-word;
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* For mobile phones: */
+    .card-img-top {
+        width: 100%;
+        height: 65vw;
+        object-fit: cover;
+    }
+}
+
+.card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 550;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.badge-primary {
+    background-color: darkslategrey;
+}
+
+.rounded {
+    border-radius: 1.1rem !important;
+}
+
+.text-color {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.jumbotron {
+    color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://tipsmake.com/data/images/facebook-cover-photo-with-anime-theme-picture-8-FePMwdts5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+}
+
+.hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 72px;
+}
+
+.text-white {
+    color: #FFFFFF;
+    text-shadow: 1px 3px 0 #222020, 1px 10px 5px #222020;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+/* preloader style */
+.preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    transition: all 100ms ease-in;
+}
+
+.preloader .circle,
+.preloader .circle .circle-inner {
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    background: linear-gradient(rgba(64, 150, 238, 1) -50%, rgba(64, 150, 238, 0) 60%);
+}
+
+.preloader .circle {
+    animation: roll 6s linear infinite;
+}
+
+.preloader .circle .circle-inner {
+    padding: 5px;
+    animation: roll 2s linear infinite reverse;
+}
+
+.preloader .circle .circle-inner::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.wrapper {
+    flex: 1 0 33.333%;
+    position: relative;
+    height: 0;
+    padding-bottom: 33.333vw;
+}
+
+.wrapper img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 250ms ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+    transform: scale(.8);
+}
+
+@keyframes roll {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

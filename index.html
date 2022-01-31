@@ -9,112 +9,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <style>
-        body,
-        .bg {
-            background-color: #1A202C;
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 20vw;
-            object-fit: cover;
-        }
-
-        .top-left {
-            position: absolute;
-            top: 8px;
-            left: 16px;
-        }
-
-        .bottom-left {
-            position: absolute;
-            bottom: 8px;
-            left: 16px;
-            word-wrap: break-word;
-        }
-
-        @media only screen and (max-width: 768px) {
-
-            /* For mobile phones: */
-            .card-img-top {
-                width: 100%;
-                height: 65vw;
-                object-fit: cover;
-            }
-        }
-
-        .card:hover {
-            transform: scale(1.08);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
-        }
-
-        .text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /* number of lines to show */
-            font-size: 12px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 550;
-            -webkit-box-orient: vertical;
-            word-wrap: break-word;
-        }
-
-        .sysnopsis {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 9;
-            -webkit-box-orient: vertical;
-            word-wrap: break-word;
-        }
-
-
-        .badge-primary {
-            background-color: darkslategrey;
-        }
-
-        .rounded {
-            border-radius: 1.1rem !important;
-        }
-
-        .text-color {
-            color: rgba(255, 255, 255, 0.8) !important;
-        }
-
-        .jumbotron {
-            color: white;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://tipsmake.com/data/images/facebook-cover-photo-with-anime-theme-picture-8-FePMwdts5.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 60vh;
-        }
-
-        .hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-            line-height: 72px;
-        }
-
-        .text-white {
-            color: #FFFFFF;
-            text-shadow: 1px 3px 0 #222020, 1px 10px 5px #222020;
-            color: #FFFFFF;
-            font-size: 18px;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #181d27;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"
+                <a v-on:click="show = false" class="navbar-brand" href="#"
                     style="color: #DC1A28; font-weight: 700;  font-size: 22px; font-family: 'Poppins', sans-serif;">Anime-X</a>
                 <div class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search Anime."
@@ -136,7 +38,6 @@
                 </div>
             </div>
         </div>
-        <!-- </section> -->
         <div class="container" id="app">
             <div class="row pb-1" v-if="!show">
                 <div class="col-7 col-lg-7 col-sm-7 col-md-7">
@@ -160,24 +61,33 @@
             </div>
             <div class="row pt-3 pb-3" v-if="show">
                 <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-center">
-                    <img :src="detailx.image_url" class="img-fluid rounded">
+                    <img :src="detailx.image_url" class="img-thumbnail" style="width: 100%;">
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-12 col-12 text-white">
-                    <span><strong>Title :</strong> {{ detailx.title }}</span><br>
+                    <h1>{{ detailx.title }}</h1>
+                    <span><Strong>Rating : </Strong>{{ detailx.score }}</span><br>
                     <span><strong>Type :</strong> {{ detailx.type }}</span><br>
                     <span><strong>Status :</strong> {{ detailx.status }}</span><br>
-                    <span class="sysnopsis"><strong>Synopsis :</strong> {{ detailx.synopsis }}</span>
-                    <div class="float-right pt-2">
-                        <button class="btn btn-outline-primary" v-on:click="show = false">Hidde</button>
-                    </div>
+                    <span><strong>Synopsis :</strong> {{ detailx.synopsis }}</span>
                 </div>
             </div>
             <div class="row" v-if="!show">
+                <!-- RECOMENDATIONS SHOW HERE --->
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 py-3" v-for="result in results">
                     <a href="#!" @click="details">
                         <div class="card border-0 h-100 rounded border-0 shadow">
-                            <img v-if="loading" src="loading.gif" class="card-img-top rounded" :data-id="result.mal_id">
-                            <img :src="result.image_url" class="card-img-top rounded" :data-id="result.mal_id">
+                            <clazy-load :src="result.image_url" class="card-img-top rounded" :data-id="result.mal_id">
+                                <transition>
+                                    <img :src="result.image_url" class="card-img-top rounded" :data-id="result.mal_id">
+                                </transition>
+                                <transition name="fade" slot="placeholder">
+                                    <div class="preloader">
+                                        <div class="circle">
+                                            <div class="circle-inner"></div>
+                                        </div>
+                                    </div>
+                                </transition>
+                            </clazy-load>
                             <div class="top-left">
                                 <span class="badge badge-primary">{{ result.type }} | {{ result.score }}</span>
                             </div>
@@ -190,26 +100,31 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/vue-clazy-load/dist/vue-clazy-load.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         function ready(f) {
             /in/.test(document.readyState) ? setTimeout('ready(' + f + ')', 9) : f();
         }
         ready(function () {
+            Vue.component("vue-clazy-load", VueClazyLoad);
+            Vue.use(VueClazyLoad)
+
             var vm = new Vue({
                 el: '#app',
+                components: {
+                    VueClazyLoad
+                },
                 data: {
                     results: [],
                     cat: 'tv',
                     show: false,
                     detailx: [],
-                    loading: true
+                    recoment: []
                 },
                 mounted() {
-                    axios.get('https://api.jikan.moe/v3/top/anime/1/tv')
-                        .then(res => {
-                            this.results = res.data.top
-                            this.loading = false
-                        })
+                    this.start()
                 },
                 methods: {
                     filter(event) {
@@ -217,7 +132,6 @@
                             .then(res => {
                                 this.results = res.data.top
                                 this.cat = event.target.value
-                                this.loading = false
                             })
                     },
                     cari(event) {
@@ -228,19 +142,27 @@
                             })
                     },
                     details(event) {
-                        axios.get('https://api.jikan.moe/v3/anime/' + event.target.dataset.id)
+                        var id = event.target.dataset.id
+                        axios.get('https://api.jikan.moe/v3/anime/' + id)
                             .then(res => {
                                 this.detailx = res.data
                                 res.data.trailer_url != null ? this.show = true : this.show = false
-                                this.loading = false
+                            })
+                        axios.get('https://api.jikan.moe/v3/anime/' + id + '/recommendations')
+                            .then(res => {
+                                this.show == false ? this.recoment = res.data.recommendations : this.start()
+                            })
+                    },
+                    start() {
+                        axios.get('https://api.jikan.moe/v3/top/anime/1/tv')
+                            .then(res => {
+                                this.results = res.data.top
                             })
                     }
                 }
             });
         })
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 
 </html>
