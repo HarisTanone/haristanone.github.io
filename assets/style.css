@@ -1,0 +1,54 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #F6F6F6;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#myhero,
+#myhero2 {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #EAF2FD;
+    border-radius: 0.3rem;
+}
+
+.myacc:hover {
+    transform: scale(1.5);
+}
+
+.myheader {
+    font-size: 5.0rem;
+}
+
+.sub_text {
+    margin-top: -25px;
+    margin-bottom: 1rem;
+    font-size: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+    .myheader {
+        font-size: 3rem;
+    }
+
+    p {
+        margin-top: 14px;
+        margin-bottom: 1.5rem;
+    }
+
+    .lead {
+        text-align: center;
+    }
+
+    .sub_text {
+        margin-top: -25px;
+        margin-bottom: 1rem;
+        font-size: 19px;
+    }
+}
